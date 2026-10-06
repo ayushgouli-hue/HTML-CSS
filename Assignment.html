@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Cards & Navigation – Beginner Friendly</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+      padding: 0 1rem;
+    }
+
+    .header {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 2rem;
+      margin: 1.5rem 0 2rem 0;
+      padding: 0.75rem 2rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+    }
+    .brand span {
+      color: #3b82f6;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e293b;
+      font-size: 1rem;
+      padding: 0.4rem 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-list a:hover {
+      color: #3b82f6;
+      border-bottom-color: #3b82f6;
+    }
+
+    .main {
+      max-width: 1200px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .intro h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
+
+    .intro p {
+      font-size: 1.2rem;
+      color: #475569;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card-section h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #0f172a;
+      border-left: 5px solid #3b82f6;
+      padding-left: 1rem;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e2e8f0;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: #cbd5e1;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .card-category {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3b82f6;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+      align-self: flex-start;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      flex: 1;
+    }
+
+    .card-meta {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .card-meta span {
+      background: #f1f5f9;
+      padding: 0.2rem 0.7rem;
+      border-radius: 2rem;
+    }
+
+    .card-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 3rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      border: 1px solid #3b82f6;
+    }
+
+    .card-btn:hover {
+      background: #2563eb;
+      transform: scale(1.02);
+    }
+
+    .footer {
+      max-width: 1200px;
+      margin: 2rem auto 2rem auto;
+      padding: 2rem 1.5rem;
+      background: #ffffff;
+      border-radius: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      text-align: center;
+      color: #64748b;
+      font-size: 0.95rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer p {
+      margin: 0.3rem 0;
+    }
+
+    @media (max-width: 720px) {
+      .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        border-radius: 1.5rem;
+      }
+
+      .brand {
+        text-align: center;
+      }
+
+      .nav-list {
+        justify-content: center;
+        gap: 1.2rem;
+      }
+
+      .intro h1 {
+        font-size: 1.8rem;
+      }
+
+      .card-section h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 0 0.75rem;
+      }
+
+      .header {
+        padding: 1rem;
+        border-radius: 1.2rem;
+      }
+
+      .nav-list {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .nav-list a {
+        display: block;
+        padding: 0.3rem;
+      }
+
+      .intro p {
+        font-size: 1rem;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 340px;
+      }
+
+      .card-grid {
+        gap: 1.5rem;
+      }
+
+      .footer {
+        border-radius: 1.2rem;
+        padding: 1.5rem;
+      }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #3b82f6;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="brand">Edu<span>Hub</span></div>
+    <nav>
+        <ul class="nav-list">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="intro">
+      <h1>Learn with our curated courses</h1>
+      <p>Beginner-friendly paths, hands-on projects and a supportive community.</p>
+    </section>
+
+    <section class="card-section">
+      <h2>Popular courses</h2>
+
+      <div class="card-grid">
+
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/id/0/300/180" alt="Web development illustration">
+          <div class="card-content">
+            <span class="card-category">Development</span>
+            <h3 class="card-title">Web Development</h3>
+            <p class="card-desc">Learn HTML, CSS and JavaScript through practical projects.</p>
+            <div class="card-meta">
+              <span>Beginner</span>
+              <span>8 weeks</span>
+            </div>
+            <a href="#" class="card-btn">View Course</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/id/1/300/180" alt="Python programming">
+          <div class="card-content">
+            <span class="card-category">Data Science</span>
+            <h3 class="card-title">Python for Data</h3>
+            <p class="card-desc">Master pandas, numpy and data visualisation from scratch.</p>
+            <div class="card-meta">
+              <span>Intermediate</span>
+              <span>10 weeks</span>
+            </div>
+            <a href="#" class="card-btn">View Course</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/id/2/300/180" alt="UX design">
+          <div class="card-content">
+            <span class="card-category">Design</span>
+            <h3 class="card-title">UX Fundamentals</h3>
+            <p class="card-desc">Understand users, wireframes and prototyping tools.</p>
+            <div class="card-meta">
+              <span>Beginner</span>
+              <span>6 weeks</span>
+            </div>
+            <a href="#" class="card-btn">View Course</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/id/3/300/180" alt="Digital marketing">
+          <div class="card-content">
+            <span class="card-category">Marketing</span>
+            <h3 class="card-title">Digital Marketing</h3>
+            <p class="card-desc">SEO, social media and analytics for modern businesses.</p>
+            <div class="card-meta">
+              <span>Beginner</span>
+              <span>6 weeks</span>
+            </div>
+            <a href="#" class="card-btn">View Course</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/id/4/300/180" alt="Mobile apps">
+          <div class="card-content">
+            <span class="card-category">Development</span>
+            <h3 class="card-title">Mobile Apps</h3>
+            <p class="card-desc">Build cross‑platform apps with React Native.</p>
+            <div class="card-meta">
+              <span>Intermediate</span>
+              <span>12 weeks</span>
+            </div>
+            <a href="#" class="card-btn">View Course</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/id/5/300/180" alt="Cloud computing">
+          <div class="card-content">
+            <span class="card-category">Cloud</span>
+            <h3 class="card-title">AWS Essentials</h3>
+            <p class="card-desc">Learn core cloud services and deployment strategies.</p>
+            <div class="card-meta">
+              <span>Advanced</span>
+              <span>9 weeks</span>
+            </div>
+            <a href="#" class="card-btn">View Course</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>EduHub – Learn, build, and grow.</p>
+    <p>© 2025 EduHub. All rights reserved.</p>
+    <p style="font-size: 0.85rem; margin-top: 0.8rem;">Made for HTML &amp; CSS practical assignment</p>
+  </footer>
+
+</body>
+</html>
